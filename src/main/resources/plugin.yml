@@ -1,0 +1,8 @@
+main: com.danifoldi.actioncosmetic.ActionCosmeticPlugin
+author: DaniFoldi
+name: ActionCosmetic
+description: Spawn particles on certain actions
+api-version: 1.13
+version: ${version}
+depend:
+  - DataVerse
