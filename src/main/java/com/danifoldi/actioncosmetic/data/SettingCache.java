@@ -8,11 +8,13 @@ import dagger.Lazy;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+@Singleton
 public class SettingCache {
 
     private final @NotNull Lazy<NamespacedDataVerse<PlayerSetting>> settingDataVerse;
@@ -33,22 +35,27 @@ public class SettingCache {
 
             requestCache.put(uuid, DUMMY);
             settingDataVerse.get().get(uuid).thenAccept(s -> {
+
                 settingCache.put(uuid, s);
                 requestCache.invalidate(uuid);
             });
+            return new PlayerSetting();
         }
-
         return setting;
     }
 
     public void update(final @NotNull UUID uuid, final @NotNull PlayerSetting setting) {
 
         settingCache.put(uuid, setting);
-        settingDataVerse.get().update(uuid, setting);
+        settingDataVerse.get().createOrUpdate(uuid, setting);
     }
 
     public void evict(final @NotNull UUID uuid) {
 
+        PlayerSetting setting = settingCache.get(uuid);
+        if (setting != null) {
+            settingDataVerse.get().createOrUpdate(uuid, setting);
+        }
         settingCache.remove(uuid);
     }
 }

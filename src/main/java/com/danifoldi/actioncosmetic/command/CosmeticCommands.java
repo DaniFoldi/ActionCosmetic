@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
-import javax.swing.*;
 
 public class CosmeticCommands implements CommandContainer {
 

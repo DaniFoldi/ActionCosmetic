@@ -15,13 +15,19 @@ public class PlayerSetting {
         return jumpSelection;
     }
 
-    public void setSneakSelection(String sneakSelection) {
+    public PlayerSetting withSneakSelection(String sneakSelection) {
 
-        this.sneakSelection = sneakSelection;
+        PlayerSetting newSetting = new PlayerSetting();
+        newSetting.sneakSelection = sneakSelection;
+        newSetting.jumpSelection = jumpSelection;
+        return newSetting;
     }
 
-    public void setJumpSelection(String jumpSelection) {
+    public PlayerSetting withJumpSelection(String jumpSelection) {
 
-        this.jumpSelection = jumpSelection;
+        PlayerSetting newSetting = new PlayerSetting();
+        newSetting.sneakSelection = sneakSelection;
+        newSetting.jumpSelection = jumpSelection;
+        return newSetting;
     }
 }

@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ActionGui {
 
@@ -45,29 +46,29 @@ public class ActionGui {
     public void open(Player player) {
 
         PlayerSetting setting = cache.get(player.getUniqueId());
-        ChestGui gui = new ChestGui(64, MessageUtil.colorCodes(config.getGuiTitle()));
+        ChestGui gui = new ChestGui(6, MessageUtil.colorCodes(config.getGuiTitle()));
         StaticPane sneakPane = new StaticPane(0, 0, 9, 3, Pane.Priority.NORMAL);
         StaticPane jumpPane = new StaticPane(0, 3, 9, 3, Pane.Priority.NORMAL);
 
         ItemStack sneakBarrier = new ItemStack(Material.BARRIER);
         if (setting.getSneakSelection().equals("")) {
 
-            sneakBarrier.addEnchantment(Enchantment.DURABILITY, 10);
+            sneakBarrier.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         }
         ItemMeta sneakMeta = sneakBarrier.getItemMeta();
         sneakMeta.displayName(Component.text(config.getNoneTitle()));
         sneakBarrier.setItemMeta(sneakMeta);
-        sneakPane.addItem(new GuiItem(sneakBarrier, event -> selectSneak(sneakPane, player.getUniqueId(), "")), 0, 0);
+        sneakPane.addItem(new GuiItem(sneakBarrier, event -> selectSneak(gui, sneakPane, player.getUniqueId(), "", 0)), 0, 0);
 
         ItemStack jumpBarrier = new ItemStack(Material.BARRIER);
         if (setting.getJumpSelection().equals("")) {
 
-            sneakBarrier.addEnchantment(Enchantment.DURABILITY, 10);
+            sneakBarrier.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         }
         ItemMeta jumpMeta = sneakBarrier.getItemMeta();
         jumpMeta.displayName(Component.text(config.getNoneTitle()));
         jumpBarrier.setItemMeta(jumpMeta);
-        jumpPane.addItem(new GuiItem(jumpBarrier, event -> selectJump(jumpPane, player.getUniqueId(), "")), 0, 0);
+        jumpPane.addItem(new GuiItem(jumpBarrier, event -> selectJump(gui, jumpPane, player.getUniqueId(), "", 0)), 0, 0);
 
         int s = 1;
         int j = 1;
@@ -79,14 +80,16 @@ public class ActionGui {
                 ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                 SkullMeta meta = (SkullMeta)head.getItemMeta();
                 PlayerProfile profile = Bukkit.createProfile(action);
-                profile.setProperty(new ProfileProperty("texture", cosmetic.texture()));
+                profile.setProperty(new ProfileProperty("textures", cosmetic.texture()));
                 meta.setPlayerProfile(profile);
                 meta.displayName(Component.text(MessageUtil.colorCodes(cosmetic.name())));
+                head.setItemMeta(meta);
                 if (setting.getSneakSelection().equals(action)) {
 
-                    head.addEnchantment(Enchantment.DURABILITY, 10);
+                    head.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
                 }
-                GuiItem item = new GuiItem(head, event -> selectSneak(sneakPane, player.getUniqueId(), action));
+                int finalS = s;
+                GuiItem item = new GuiItem(head, event -> selectSneak(gui, sneakPane, player.getUniqueId(), action, finalS));
                 sneakPane.addItem(item, s % 9, s / 9);
                 s++;
             }
@@ -95,14 +98,16 @@ public class ActionGui {
                 ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                 SkullMeta meta = (SkullMeta)head.getItemMeta();
                 PlayerProfile profile = Bukkit.createProfile(action);
-                profile.setProperty(new ProfileProperty("texture", cosmetic.texture()));
+                profile.setProperty(new ProfileProperty("textures", cosmetic.texture()));
                 meta.setPlayerProfile(profile);
                 meta.displayName(Component.text(MessageUtil.colorCodes(cosmetic.name())));
+                head.setItemMeta(meta);
                 if (setting.getJumpSelection().equals(action)) {
 
-                    head.addEnchantment(Enchantment.DURABILITY, 10);
+                    head.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
                 }
-                GuiItem item = new GuiItem(head, event -> selectJump(jumpPane, player.getUniqueId(), action));
+                int finalJ = j;
+                GuiItem item = new GuiItem(head, event -> selectJump(gui, jumpPane, player.getUniqueId(), action, finalJ));
                 jumpPane.addItem(item, j % 9, j / 9);
                 j++;
             }
@@ -113,31 +118,37 @@ public class ActionGui {
         scheduler.runTask(plugin, () -> gui.show(player));
     }
 
-    private void selectSneak(Pane pane, UUID uuid, String action) {
+    private void selectSneak(ChestGui gui, Pane pane, UUID uuid, String action, int i) {
 
         PlayerSetting setting = cache.get(uuid);
+        AtomicInteger index = new AtomicInteger(0);
         pane.getItems().forEach(guiItem -> {
-            if (setting.getSneakSelection().equals(action)) {
+            if (index.getAndIncrement() == i) {
 
-                guiItem.getItem().addEnchantment(Enchantment.DURABILITY, 10);
+                guiItem.getItem().addUnsafeEnchantment(Enchantment.DURABILITY, 10);
             } else {
 
                 guiItem.getItem().removeEnchantment(Enchantment.DURABILITY);
             }
         });
+        cache.update(uuid, setting.withSneakSelection(action));
+        gui.update();
     }
 
-    private void selectJump(Pane pane, UUID uuid, String action) {
+    private void selectJump(ChestGui gui,Pane pane, UUID uuid, String action, int i) {
 
         PlayerSetting setting = cache.get(uuid);
+        AtomicInteger index = new AtomicInteger(0);
         pane.getItems().forEach(guiItem -> {
-            if (setting.getJumpSelection().equals(action)) {
+            if (index.getAndIncrement() == i) {
 
-                guiItem.getItem().addEnchantment(Enchantment.DURABILITY, 10);
+                guiItem.getItem().addUnsafeEnchantment(Enchantment.DURABILITY, 10);
             } else {
 
                 guiItem.getItem().removeEnchantment(Enchantment.DURABILITY);
             }
         });
+        cache.update(uuid, setting.withJumpSelection(action));
+        gui.update();
     }
 }

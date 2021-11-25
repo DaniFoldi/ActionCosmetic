@@ -6,7 +6,6 @@ import com.danifoldi.actioncosmetic.data.PlayerSetting;
 import com.danifoldi.actioncosmetic.data.SettingCache;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
@@ -14,7 +13,6 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
-import java.util.Locale;
 
 public class ActionListener implements Listener {
 
@@ -40,13 +38,13 @@ public class ActionListener implements Listener {
     @EventHandler
     public void onSneak(PlayerToggleSneakEvent event) {
 
-        if (!event.getPlayer().isSneaking()) {
+        if (event.getPlayer().isSneaking()) {
 
             return;
         }
 
         PlayerSetting setting = cache.get(event.getPlayer().getUniqueId());
-        if (setting == null) {
+        if (setting == null || setting.getSneakSelection().equals("")) {
 
             return;
         }
@@ -54,7 +52,7 @@ public class ActionListener implements Listener {
 
             return;
         }
-
+        System.out.println(setting.getSneakSelection());
         Location location = event.getPlayer().getLocation().clone().add(0, 2.0, 0);
 
         scheduler.runTaskLater(plugin, () -> {
@@ -69,14 +67,8 @@ public class ActionListener implements Listener {
     @EventHandler
     public void onJump(PlayerJumpEvent event) {
 
-        if (!event.getPlayer().isJumping()) {
-
-            return;
-        }
-
         PlayerSetting setting = cache.get(event.getPlayer().getUniqueId());
-
-        if (setting == null) {
+        if (setting == null || setting.getJumpSelection().equals("")) {
 
             return;
         }

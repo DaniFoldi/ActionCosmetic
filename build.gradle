@@ -56,6 +56,8 @@ shadowJar {
     }
 
     relocate 'grapefruit.command', 'com.danifoldi.actioncosmetic.lib.grapefruit'
+    relocate 'com.danifoldi.messagelib', 'com.danifoldi.actioncosmetic.lib.messagelib'
+    relocate 'com.danifoldi.DML', 'com.danifoldi.actioncosmetic.lib.DML'
     relocate 'javax.inject', 'com.danifoldi.actioncosmetic.lib.inject'
     relocate 'dagger', 'com.danifoldi.actioncosmetic.lib.dagger'
     relocate 'com.electronwill.nightconfig', 'com.danifoldi.actioncosmetic.lib.nightconfig'

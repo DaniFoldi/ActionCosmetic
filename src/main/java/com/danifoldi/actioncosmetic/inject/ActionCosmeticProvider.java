@@ -5,13 +5,11 @@ import com.danifoldi.actioncosmetic.data.PlayerSetting;
 import com.danifoldi.dataverse.DataVerse;
 import com.danifoldi.dataverse.data.NamespacedDataVerse;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Singleton;
-import javax.xml.crypto.Data;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,7 +20,6 @@ public class ActionCosmeticProvider {
     @Singleton
     public @NotNull NamespacedDataVerse<@NotNull PlayerSetting> provideSettingsDataverse(ActionCosmeticPlugin plugin) {
 
-        System.out.println(DataVerse.getDataVerse());
         return DataVerse.getDataVerse().getNamespacedDataVerse(plugin, "playerSettings", PlayerSetting::new);
     }
 
