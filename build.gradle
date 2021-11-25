@@ -27,7 +27,7 @@ dependencies {
     compileOnly 'com.danifoldi:DataVerse:0.1.0'
     implementation 'com.danifoldi:messagelib:1.0.1'
     implementation 'grapefruit:grapefruit:1.3.0'
-    implementation ('com.electronwill.night-config:yaml:3.6.4') {
+    implementation ('com.electronwill.night-config:yaml:3.6.5') {
         exclude module: 'snakeyaml'
     }
 
