@@ -52,7 +52,6 @@ public class ActionListener implements Listener {
 
             return;
         }
-        System.out.println(setting.getSneakSelection());
         Location location = event.getPlayer().getLocation().clone().add(0, 2.0, 0);
 
         scheduler.runTaskLater(plugin, () -> {

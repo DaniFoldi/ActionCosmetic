@@ -27,7 +27,6 @@ public class Config {
     }
 
     private String guiTitle;
-    private String noneTitle;
     private Map<String, Cosmetic> cosmetics;
 
     private Path configFile;
@@ -36,13 +35,19 @@ public class Config {
         configFile = file;
         DmlObject config = DmlParser.parse(file).asObject();
         guiTitle = config.get("guiTitle").asString().value();
-        noneTitle = config.get("noneTitle").asString().value();
         DmlObject configuredCosmetics = config.get("cosmetics").asObject();
 
         cosmetics = new ConcurrentHashMap<>();
+        cosmetics.put("", new Cosmetic(
+                config.get("noneTexture").asString().value(),
+                config.get("noneActiveTexture").asString().value(),
+                null,
+                config.get("noneTitle").asString().value()));
+
         for (DmlKey cosmeticName: configuredCosmetics.keys()) {
             cosmetics.put(cosmeticName.value(), new Cosmetic(
                     configuredCosmetics.get(cosmeticName).asObject().get("texture").asString().value(),
+                    configuredCosmetics.get(cosmeticName).asObject().get("activeTexture").asString().value(),
                     Particle.valueOf(configuredCosmetics.get(cosmeticName).asObject().get("particle").asString().value().toUpperCase(Locale.ROOT)),
                     configuredCosmetics.get(cosmeticName).asObject().get("name").asString().value()));
         }
@@ -59,10 +64,6 @@ public class Config {
 
     public String getGuiTitle() {
         return guiTitle;
-    }
-
-    public String getNoneTitle() {
-        return noneTitle;
     }
 
     public Map<String, Cosmetic> getCosmetics() {

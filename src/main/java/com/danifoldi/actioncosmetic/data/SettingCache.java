@@ -12,20 +12,24 @@ import javax.inject.Singleton;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
 public class SettingCache {
 
     private final @NotNull Lazy<NamespacedDataVerse<PlayerSetting>> settingDataVerse;
+    private final @NotNull ExecutorService asyncExecutor;
     private final @NotNull Map<UUID, PlayerSetting> settingCache = new ConcurrentHashMap<>();
     private final @NotNull Cache<UUID, Object> requestCache = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.SECONDS).build();
     private final static @NotNull Object DUMMY = new Object();
 
     @Inject
-    public SettingCache(final @NotNull Lazy<NamespacedDataVerse<PlayerSetting>> settingDataVerse) {
+    public SettingCache(final @NotNull Lazy<NamespacedDataVerse<PlayerSetting>> settingDataVerse,
+                        final @NotNull ExecutorService asyncExecutor) {
 
         this.settingDataVerse = settingDataVerse;
+        this.asyncExecutor = asyncExecutor;
     }
 
     public PlayerSetting get(final @NotNull UUID uuid) {
@@ -34,11 +38,11 @@ public class SettingCache {
         if (setting == null && requestCache.getIfPresent(uuid) == null) {
 
             requestCache.put(uuid, DUMMY);
-            settingDataVerse.get().get(uuid).thenAccept(s -> {
+            settingDataVerse.get().get(uuid).thenAcceptAsync(s -> {
 
                 settingCache.put(uuid, s);
                 requestCache.invalidate(uuid);
-            });
+            }, asyncExecutor);
             return new PlayerSetting();
         }
         return setting;
