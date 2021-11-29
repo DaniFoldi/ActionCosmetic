@@ -2,6 +2,7 @@ package com.danifoldi.actioncosmetic.listener;
 
 import com.danifoldi.actioncosmetic.ActionCosmeticPlugin;
 import com.danifoldi.actioncosmetic.config.Config;
+import com.danifoldi.actioncosmetic.data.Cosmetic;
 import com.danifoldi.actioncosmetic.data.PlayerSetting;
 import com.danifoldi.actioncosmetic.data.SettingCache;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
@@ -52,13 +53,18 @@ public class ActionListener implements Listener {
 
             return;
         }
+        Cosmetic cosmetic = config.getCosmetics().stream().filter(c -> c.action().equals(setting.getSneakSelection())).findFirst().orElse(null);
+        if (cosmetic == null) {
+
+            return;
+        }
         Location location = event.getPlayer().getLocation().clone().add(0, 2.0, 0);
 
         scheduler.runTaskLater(plugin, () -> {
             for (int i = 0; i < COUNT; i++) {
                 final Location l = location.clone();
                 l.setX(l.getX() + 0.5 * Math.cos((double) i / COUNT * Math.PI * 2));
-                l.getWorld().spawnParticle(config.getCosmetics().get(setting.getSneakSelection()).particle(), l, 2, .2, .2, .2, 5.0e-4);
+                l.getWorld().spawnParticle(cosmetic.particle(), l, 2, .2, .2, .2, 5.0e-4);
             }
         }, 1);
     }
@@ -75,6 +81,11 @@ public class ActionListener implements Listener {
 
             return;
         }
+        Cosmetic cosmetic = config.getCosmetics().stream().filter(c -> c.action().equals(setting.getJumpSelection())).findFirst().orElse(null);
+        if (cosmetic == null) {
+
+            return;
+        }
 
         Location location = event.getPlayer().getLocation().clone().add(0, 2.0, 0);
 
@@ -82,7 +93,7 @@ public class ActionListener implements Listener {
             for (int i = 0; i < COUNT; i++) {
                 final Location l = location.clone();
                 l.setX(l.getX() + 0.5 * Math.cos((double) i / COUNT * Math.PI * 2));
-                l.getWorld().spawnParticle(config.getCosmetics().get(setting.getJumpSelection()).particle(), l, 2, .2, .2, .2, 5.0e-4);
+                l.getWorld().spawnParticle(cosmetic.particle(), l, 2, .2, .2, .2, 5.0e-4);
             }
         }, 1);
     }

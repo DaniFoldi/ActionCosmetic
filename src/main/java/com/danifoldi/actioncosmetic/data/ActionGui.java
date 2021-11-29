@@ -43,68 +43,79 @@ public class ActionGui {
         this.cache = cache;
     }
 
-    public void open(Player player) {
+    public void openSneak(Player player) {
 
         PlayerSetting setting = cache.get(player.getUniqueId());
-        ChestGui gui = new ChestGui(6, MessageUtil.colorCodes(config.getGuiTitle()));
+        ChestGui gui = new ChestGui(3, MessageUtil.colorCodes(config.getSneakTitle()));
         StaticPane sneakPane = new StaticPane(0, 0, 9, 3, Pane.Priority.NORMAL);
-        StaticPane jumpPane = new StaticPane(0, 3, 9, 3, Pane.Priority.NORMAL);
-        List<Pair<ItemStack, String>> sneakHeads = new ArrayList<>();
-        List<Pair<ItemStack, String>> jumpHeads = new ArrayList<>();
+        List<Pair<ItemStack, Cosmetic>> sneakHeads = new ArrayList<>();
 
         int s = 0;
-        int j = 0;
-        for (String action: config.getCosmetics().keySet()) {
+        for (Cosmetic cosmetic: config.getCosmetics()) {
 
-            Cosmetic cosmetic = config.getCosmetics().get(action);
-            if (action.equals("") || player.hasPermission("actioncosmetic.sneak." + action)) {
+            if (cosmetic.action().equals("") || player.hasPermission("actioncosmetic.sneak." + cosmetic.action())) {
 
                 ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                 ItemMeta meta = head.getItemMeta();
                 meta.displayName(Component.text(MessageUtil.colorCodes(cosmetic.name())));
                 head.setItemMeta(meta);
-                applyTexture(head, action, setting.getSneakSelection().equals(action));
+                applyTexture(head, cosmetic, setting.getSneakSelection().equals(cosmetic.action()));
                 GuiItem item = new GuiItem(head, event -> {
 
-                    sneakHeads.forEach(p -> applyTexture(p.getFirst(), p.getSecond(), p.getSecond().equals(action)));
-                    cache.update(player.getUniqueId(), cache.get(player.getUniqueId()).withSneakSelection(action));
+                    sneakHeads.forEach(p -> applyTexture(p.getFirst(), p.getSecond(), p.getSecond().equals(cosmetic)));
+                    cache.update(player.getUniqueId(), cache.get(player.getUniqueId()).withSneakSelection(cosmetic.action()));
                     gui.update();
                 });
                 sneakPane.addItem(item, s % 9, s / 9);
-                sneakHeads.add(Pair.of(head, action));
+                sneakHeads.add(Pair.of(head, cosmetic));
                 s++;
-            }
-            if (action.equals("") || player.hasPermission("actioncosmetic.jump." + action)) {
-
-                ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-                ItemMeta meta = head.getItemMeta();
-                meta.displayName(Component.text(MessageUtil.colorCodes(cosmetic.name())));
-                head.setItemMeta(meta);
-                applyTexture(head, action, setting.getJumpSelection().equals(action));
-                GuiItem item = new GuiItem(head, event -> {
-
-                    jumpHeads.forEach(p -> applyTexture(p.getFirst(), p.getSecond(), p.getSecond().equals(action)));
-                    cache.update(player.getUniqueId(), cache.get(player.getUniqueId()).withJumpSelection(action));
-                    gui.update();
-                });
-                jumpPane.addItem(item, j % 9, j / 9);
-                jumpHeads.add(Pair.of(head, action));
-                j++;
             }
         }
 
         gui.addPane(sneakPane);
+        scheduler.runTask(plugin, () -> gui.show(player));
+    }
+
+    public void openJump(Player player) {
+
+        PlayerSetting setting = cache.get(player.getUniqueId());
+        ChestGui gui = new ChestGui(3, MessageUtil.colorCodes(config.getJumpTitle()));
+        StaticPane jumpPane = new StaticPane(0, 0, 9, 3, Pane.Priority.NORMAL);
+        List<Pair<ItemStack, Cosmetic>> jumpHeads = new ArrayList<>();
+
+        int j = 0;
+        for (Cosmetic cosmetic: config.getCosmetics()) {
+
+            if (cosmetic.action().equals("") || player.hasPermission("actioncosmetic.jump." + cosmetic.action())) {
+
+                ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+                ItemMeta meta = head.getItemMeta();
+                meta.displayName(Component.text(MessageUtil.colorCodes(cosmetic.name())));
+                head.setItemMeta(meta);
+                applyTexture(head, cosmetic, setting.getJumpSelection().equals(cosmetic.action()));
+                GuiItem item = new GuiItem(head, event -> {
+
+                    jumpHeads.forEach(p -> applyTexture(p.getFirst(), p.getSecond(), p.getSecond().equals(cosmetic)));
+                    cache.update(player.getUniqueId(), cache.get(player.getUniqueId()).withJumpSelection(cosmetic.action()));
+                    gui.update();
+                });
+                jumpPane.addItem(item, j % 9, j / 9);
+                jumpHeads.add(Pair.of(head, cosmetic));
+                j++;
+            }
+        }
+
         gui.addPane(jumpPane);
         scheduler.runTask(plugin, () -> gui.show(player));
     }
 
-    private void applyTexture(ItemStack item, String action, boolean selected) {
+    private void applyTexture(ItemStack item, Cosmetic cosmetic, boolean selected) {
 
         SkullMeta meta = (SkullMeta)item.getItemMeta();
-        PlayerProfile profile = Bukkit.createProfile("act" + action);
-        profile.setProperty(new ProfileProperty("textures", selected ? config.getCosmetics().get(action).activeTexture() : config.getCosmetics().get(action).texture()));
+        PlayerProfile profile = Bukkit.createProfile("act" + cosmetic.action());
+        profile.setProperty(new ProfileProperty("textures", selected ? cosmetic.activeTexture() : cosmetic.texture()));
         meta.setPlayerProfile(profile);
-        meta.displayName(Component.text(MessageUtil.colorCodes(config.getCosmetics().get(action).name())));
+        meta.displayName(Component.text(MessageUtil.colorCodes(cosmetic.name())));
         item.setItemMeta(meta);
     }
 }

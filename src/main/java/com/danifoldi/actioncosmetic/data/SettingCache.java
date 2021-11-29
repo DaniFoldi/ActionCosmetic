@@ -1,6 +1,5 @@
 package com.danifoldi.actioncosmetic.data;
 
-import com.danifoldi.dataverse.DataVerse;
 import com.danifoldi.dataverse.data.NamespacedDataVerse;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -40,7 +39,13 @@ public class SettingCache {
             requestCache.put(uuid, DUMMY);
             settingDataVerse.get().get(uuid).thenAcceptAsync(s -> {
 
-                settingCache.put(uuid, s);
+                if (s != null) {
+
+                    settingCache.put(uuid, s);
+                } else {
+
+                    settingCache.put(uuid, new PlayerSetting());
+                }
                 requestCache.invalidate(uuid);
             }, asyncExecutor);
             return new PlayerSetting();
@@ -58,6 +63,7 @@ public class SettingCache {
 
         PlayerSetting setting = settingCache.get(uuid);
         if (setting != null) {
+
             settingDataVerse.get().createOrUpdate(uuid, setting);
         }
         settingCache.remove(uuid);

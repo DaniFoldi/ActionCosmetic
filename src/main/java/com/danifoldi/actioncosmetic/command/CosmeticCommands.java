@@ -24,11 +24,16 @@ public class CosmeticCommands implements CommandContainer {
         this.gui = gui;
     }
 
-    @Redirect(from = "cosmetic|actioncosmetic")
-    @CommandDefinition(route = "cosmetic|actioncosmetic set", permission = "actioncosmetic.command.set", runAsync = true)
-    public void onSetCommand(final @Source Player player) {
+    @CommandDefinition(route = "cosmetic|actioncosmetic sneak", permission = "actioncosmetic.command.sneak", runAsync = true)
+    public void onSneakCommand(final @Source Player player) {
 
-        gui.open(player);
+        gui.openSneak(player);
+    }
+
+    @CommandDefinition(route = "cosmetic|actioncosmetic jump", permission = "actioncosmetic.command.jump", runAsync = true)
+    public void onJumpCommand(final @Source Player player) {
+
+        gui.openJump(player);
     }
 
     @CommandDefinition(route = "cosmetic|actioncosmetic reload", permission = "actioncosmetic.command.reload", runAsync = true)

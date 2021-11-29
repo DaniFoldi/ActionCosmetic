@@ -12,9 +12,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 @Singleton
@@ -26,26 +27,30 @@ public class Config {
         this.logger = logger;
     }
 
-    private String guiTitle;
-    private Map<String, Cosmetic> cosmetics;
+    private String sneakTitle;
+    private String jumpTitle;
+    private List<Cosmetic> cosmetics;
 
     private Path configFile;
 
     public void load(Path file) throws IOException, DmlParseException {
         configFile = file;
         DmlObject config = DmlParser.parse(file).asObject();
-        guiTitle = config.get("guiTitle").asString().value();
+        sneakTitle = config.get("sneakTitle").asString().value();
+        jumpTitle = config.get("jumpTitle").asString().value();
         DmlObject configuredCosmetics = config.get("cosmetics").asObject();
 
-        cosmetics = new ConcurrentHashMap<>();
-        cosmetics.put("", new Cosmetic(
+        cosmetics = Collections.synchronizedList(new ArrayList<>());
+        cosmetics.add(new Cosmetic(
+                "",
                 config.get("noneTexture").asString().value(),
                 config.get("noneActiveTexture").asString().value(),
                 null,
                 config.get("noneTitle").asString().value()));
 
         for (DmlKey cosmeticName: configuredCosmetics.keys()) {
-            cosmetics.put(cosmeticName.value(), new Cosmetic(
+            cosmetics.add(new Cosmetic(
+                    cosmeticName.value(),
                     configuredCosmetics.get(cosmeticName).asObject().get("texture").asString().value(),
                     configuredCosmetics.get(cosmeticName).asObject().get("activeTexture").asString().value(),
                     Particle.valueOf(configuredCosmetics.get(cosmeticName).asObject().get("particle").asString().value().toUpperCase(Locale.ROOT)),
@@ -62,11 +67,15 @@ public class Config {
         }
     }
 
-    public String getGuiTitle() {
-        return guiTitle;
+    public String getSneakTitle() {
+        return sneakTitle;
     }
 
-    public Map<String, Cosmetic> getCosmetics() {
-        return Map.copyOf(cosmetics);
+    public String getJumpTitle() {
+        return jumpTitle;
+    }
+
+    public List<Cosmetic> getCosmetics() {
+        return List.copyOf(cosmetics);
     }
 }
