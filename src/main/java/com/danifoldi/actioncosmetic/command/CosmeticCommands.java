@@ -7,12 +7,14 @@ import grapefruit.command.CommandDefinition;
 import grapefruit.command.dispatcher.Redirect;
 import grapefruit.command.parameter.modifier.Source;
 import net.kyori.adventure.text.Component;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
+@SuppressWarnings("ClassCanBeRecord, unused")
 public class CosmeticCommands implements CommandContainer {
 
     private final @NotNull Config config;
@@ -29,8 +31,8 @@ public class CosmeticCommands implements CommandContainer {
     @CommandDefinition(route = "cosmetic|actioncosmetic help", permission = "actioncosmetic.command.help", runAsync = true)
     public void onHelpCommand(final @Source CommandSender sender) {
 
-        sender.sendMessage(Component.text("/cosmetic jump: " + config.getJumpTitle()));
-        sender.sendMessage(Component.text("/cosmetic sneak: " + config.getSneakTitle()));
+        sender.sendMessage(Component.text(ChatColor.translateAlternateColorCodes('&', "/cosmetic jump: " + config.getJumpTitle())));
+        sender.sendMessage(Component.text(ChatColor.translateAlternateColorCodes('&', "/cosmetic sneak: " + config.getSneakTitle())));
     }
 
     @CommandDefinition(route = "cosmetic|actioncosmetic sneak", permission = "actioncosmetic.command.sneak", runAsync = true)
