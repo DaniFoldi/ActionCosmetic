@@ -6,14 +6,22 @@ import com.danifoldi.actioncosmetic.data.Cosmetic;
 import com.danifoldi.actioncosmetic.data.PlayerSetting;
 import com.danifoldi.actioncosmetic.data.SettingCache;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.metadata.Metadatable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 public class ActionListener implements Listener {
 
@@ -22,7 +30,18 @@ public class ActionListener implements Listener {
     private final @NotNull ActionCosmeticPlugin plugin;
     private final @NotNull Config config;
 
+    private final @NotNull Cache<UUID, Object> rateLimit = CacheBuilder.newBuilder().expireAfterWrite(400, TimeUnit.MILLISECONDS).build();
+
     private final int COUNT = 4;
+    private final Predicate<Metadatable> VANISHED = p -> {
+        for (final MetadataValue meta : p.getMetadata("vanished")) {
+            if (meta.asBoolean()) {
+                return true;
+            }
+        }
+
+        return false;
+    };
 
     @Inject
     public ActionListener(final @NotNull SettingCache cache,
@@ -39,18 +58,30 @@ public class ActionListener implements Listener {
     @EventHandler
     public void onSneak(PlayerToggleSneakEvent event) {
 
-        if (event.getPlayer().isSneaking()) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        if (player.isSneaking()) {
+
+            return;
+        }
+        if (VANISHED.test(player)) {
+
+            return;
+        }
+        if (rateLimit.getIfPresent(uuid) != null && !player.hasPermission("actioncosmetic.ratelimit.bypass")) {
 
             return;
         }
 
-        PlayerSetting setting = cache.get(event.getPlayer().getUniqueId());
+        PlayerSetting setting = cache.get(uuid);
         if (setting == null || setting.getSneakSelection().equals("")) {
 
             return;
         }
-        if (!event.getPlayer().hasPermission("actioncosmetic.sneak." + setting.getSneakSelection())) {
+        if (!player.hasPermission("actioncosmetic.sneak." + setting.getSneakSelection())) {
 
+            cache.update(uuid, setting.withSneakSelection(""));
             return;
         }
         Cosmetic cosmetic = config.getCosmetics().stream().filter(c -> c.action().equals(setting.getSneakSelection())).findFirst().orElse(null);
@@ -58,7 +89,7 @@ public class ActionListener implements Listener {
 
             return;
         }
-        Location location = event.getPlayer().getLocation().clone().add(0, 2.0, 0);
+        Location location = player.getLocation().add(0, 2.0, 0);
 
         scheduler.runTaskLater(plugin, () -> {
             for (int i = 0; i < COUNT; i++) {
@@ -67,18 +98,32 @@ public class ActionListener implements Listener {
                 l.getWorld().spawnParticle(cosmetic.particle(), l, 2, .2, .2, .2, 5.0e-4);
             }
         }, 1);
+        rateLimit.put(uuid, uuid);
     }
 
     @EventHandler
     public void onJump(PlayerJumpEvent event) {
 
-        PlayerSetting setting = cache.get(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        if (VANISHED.test(player)) {
+
+            return;
+        }
+        if (rateLimit.getIfPresent(uuid) != null && !player.hasPermission("actioncosmetic.ratelimit.bypass")) {
+
+            return;
+        }
+
+        PlayerSetting setting = cache.get(uuid);
         if (setting == null || setting.getJumpSelection().equals("")) {
 
             return;
         }
-        if (!event.getPlayer().hasPermission("actioncosmetic.jump." + setting.getJumpSelection())) {
+        if (!player.hasPermission("actioncosmetic.jump." + setting.getJumpSelection())) {
 
+            cache.update(player.getUniqueId(), setting.withJumpSelection(""));
             return;
         }
         Cosmetic cosmetic = config.getCosmetics().stream().filter(c -> c.action().equals(setting.getJumpSelection())).findFirst().orElse(null);
@@ -87,7 +132,7 @@ public class ActionListener implements Listener {
             return;
         }
 
-        Location location = event.getPlayer().getLocation().clone().add(0, 2.0, 0);
+        Location location = player.getLocation().add(0, 2.0, 0);
 
         scheduler.runTaskLater(plugin, () -> {
             for (int i = 0; i < COUNT; i++) {
@@ -96,5 +141,6 @@ public class ActionListener implements Listener {
                 l.getWorld().spawnParticle(cosmetic.particle(), l, 2, .2, .2, .2, 5.0e-4);
             }
         }, 1);
+        rateLimit.put(uuid, uuid);
     }
 }

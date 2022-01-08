@@ -1,62 +1,62 @@
 sneakTitle: "&5Shift effekt kiválasztása"
 jumpTitle: "&5Ugrás effekt kiválasztása"
 noneTitle: "Semmi"
-noneTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI5ZmI5ZjU5M2I2YWU1MzNkZmE4Y2U3OTYxNWZjYzM1ODk0YTQyY2JiNDFkZTU5OGQ2OTQ3NjczNTJmZSJ9fX0="
-noneActiveTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2ZlMWQyMjJlYjFhMzVkNzMzZmJkZTdjMTM0MmVmYTgyMTg5OGI1NmM3YzI4YTY5YjY4Nzg5MjBiNTExIn19fQ=="
+noneTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcLzJkYmY3MTFmNDQwMGRmZDdkZjZlMTZlNGYxYzE0NTE3YzU5NTk1N2Y4NjFiYWZkYTRmYWJiZDA2NjI1YWQyZTkiLCJtZXRhZGF0YSI6eyJtb2RlbCI6InNsaW0ifX19fQ=="
+noneActiveTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2MzM2RmMTUwYTJkMzk1NWI3ZjFlNDEzZDk2NzhkNjc3NGZmZTg2NDg1YzMyODY0ZmI1N2RmODMzN2JiMDM0OSJ9fX0="
 
 cosmetics: {
   heart: {
-      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI5ZmI5ZjU5M2I2YWU1MzNkZmE4Y2U3OTYxNWZjYzM1ODk0YTQyY2JiNDFkZTU5OGQ2OTQ3NjczNTJmZSJ9fX0="
-      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-      particle: "heart"
-      name: "Szeretet"
-    }
-    anger: {
-        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWJkNTlhMTNlNDY5ZjczYWRhMmFmNmRjOWY1MWI1NDgwY2QzNGE5ODExZjY3OTc1NGMxM2ZmYTVmOWY1ZjYifX19"
-        activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-        particle: "villager_angry"
-        name: "Düh"
-    }
-    sad: {
-      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWYxYjg3NWRlNDljNTg3ZTNiNDAyM2NlMjRkNDcyZmYyNzU4M2ExZjA1NGYzN2U3M2ExMTU0YjViNTQ5OCJ9fX0="
-      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-      particle: "fireworks_spark"
-      name: "Szomor"
-    }
-    think: {
-        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0="
-        activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-        particle: "explosion_normal"
-        name: "Mélázás"
-    }
-    mad: {
-      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkNGJlYTM2NmFjYTU4ZGQ1YjIyZTk0MGJjZGQ0YmE0NWJmODg0MjFmNmQ4MzExNThiODc5ZjJjOGFiY2UxOCJ9fX0="
-      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-      particle: "smoke_normal"
-      name: "Mufurc"
-    }
-    love: {
-        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjRlYWY4OTQyOGEzNjQ5YzI2ZWRjMWY3MWNjMTlmMjYzZTlmNGViMzFlZDE4Yzk3Njg2YWFjODJmNzY0MjQyIn19fQ=="
-        activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-        particle: "damage_indicator"
-        name: "Szerelem"
-    }
-    party: {
-      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDViMDU5NWE1MTFjNGIzNzc0MzdhNTE2ZmVmYmVhMmZmY2YzNTU4NWFlNTM0NjViMGU4NjAyNGEyMTVlYiJ9fX0="
-      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-      particle: "spell"
-      name: "Party"
-    }
-    happy: {
-        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFjNmRkOTc1OGQ4YzUyNGMwMTA2ZjQ1NWRhYjMzZTUxYjdlZDE0MzMyMWZjOTQ0NjUyMTFiNjg3NzVkNjFjIn19fQ=="
-        activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-        particle: "villager_happy"
-        name: "Boldog"
-    }
-    cool: {
-      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODY4ZjRjZWY5NDlmMzJlMzNlYzVhZTg0NWY5YzU2OTgzY2JlMTMzNzVhNGRlYzQ2ZTViYmZiN2RjYjYifX19"
-      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
-      particle: "totem"
-      name: "Laza"
-    }
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI5ZmI5ZjU5M2I2YWU1MzNkZmE4Y2U3OTYxNWZjYzM1ODk0YTQyY2JiNDFkZTU5OGQ2OTQ3NjczNTJmZSJ9fX0="
+    activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzciLCJtZXRhZGF0YSI6eyJtb2RlbCI6InNsaW0ifX19fQ=="
+    particle: "heart"
+    name: "Szeretet"
+  }
+  anger: {
+      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWJkNTlhMTNlNDY5ZjczYWRhMmFmNmRjOWY1MWI1NDgwY2QzNGE5ODExZjY3OTc1NGMxM2ZmYTVmOWY1ZjYifX19"
+      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzciLCJtZXRhZGF0YSI6eyJtb2RlbCI6InNsaW0ifX19fQ=="
+      particle: "villager_angry"
+      name: "Düh"
+  }
+  sad: {
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWYxYjg3NWRlNDljNTg3ZTNiNDAyM2NlMjRkNDcyZmYyNzU4M2ExZjA1NGYzN2U3M2ExMTU0YjViNTQ5OCJ9fX0="
+    activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzcifX19"
+    particle: "fireworks_spark"
+    name: "Szomor"
+  }
+  think: {
+      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0="
+      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzcifX19"
+      particle: "explosion_normal"
+      name: "Mélázás"
+  }
+  mad: {
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkNGJlYTM2NmFjYTU4ZGQ1YjIyZTk0MGJjZGQ0YmE0NWJmODg0MjFmNmQ4MzExNThiODc5ZjJjOGFiY2UxOCJ9fX0="
+    activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM0ZDU0NjEzNjFiOTk3OTNlYTFjMDQ5OGI4MDdkNjYxM2I3YjJjNDZhN2E3N2IzZDZkNjAyYmU5MmFjZTM0MyJ9fX0="
+    particle: "smoke_normal"
+    name: "Mufurc"
+  }
+  love: {
+      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjRlYWY4OTQyOGEzNjQ5YzI2ZWRjMWY3MWNjMTlmMjYzZTlmNGViMzFlZDE4Yzk3Njg2YWFjODJmNzY0MjQyIn19fQ=="
+      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzcifX19"
+      particle: "damage_indicator"
+      name: "Szerelem"
+  }
+  party: {
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDViMDU5NWE1MTFjNGIzNzc0MzdhNTE2ZmVmYmVhMmZmY2YzNTU4NWFlNTM0NjViMGU4NjAyNGEyMTVlYiJ9fX0="
+    activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzcifX19"
+    particle: "spell"
+    name: "Party"
+  }
+  happy: {
+      texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFjNmRkOTc1OGQ4YzUyNGMwMTA2ZjQ1NWRhYjMzZTUxYjdlZDE0MzMyMWZjOTQ0NjUyMTFiNjg3NzVkNjFjIn19fQ=="
+      activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzcifX19"
+      particle: "villager_happy"
+      name: "Boldog"
+  }
+  cool: {
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODY4ZjRjZWY5NDlmMzJlMzNlYzVhZTg0NWY5YzU2OTgzY2JlMTMzNzVhNGRlYzQ2ZTViYmZiN2RjYjYifX19"
+    activeTexture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6XC9cL3RleHR1cmVzLm1pbmVjcmFmdC5uZXRcL3RleHR1cmVcL2JhZmY3MjA2YThhNTc3ZWU4N2VhN2Q3NzA4OGNmNzRiN2YxM2U5YzdlMjJmYzFkMzliZmZmNjI3MTY2ZGU0MzcifX19"
+    particle: "totem"
+    name: "Laza"
+  }
 }

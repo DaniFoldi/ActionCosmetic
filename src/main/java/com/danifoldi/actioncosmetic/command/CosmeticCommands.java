@@ -6,6 +6,7 @@ import grapefruit.command.CommandContainer;
 import grapefruit.command.CommandDefinition;
 import grapefruit.command.dispatcher.Redirect;
 import grapefruit.command.parameter.modifier.Source;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +25,14 @@ public class CosmeticCommands implements CommandContainer {
         this.gui = gui;
     }
 
+    @Redirect(from = "cosmetic|actioncosmetic")
+    @CommandDefinition(route = "cosmetic|actioncosmetic help", permission = "actioncosmetic.command.help", runAsync = true)
+    public void onHelpCommand(final @Source CommandSender sender) {
+
+        sender.sendMessage(Component.text("/cosmetic jump: " + config.getJumpTitle()));
+        sender.sendMessage(Component.text("/cosmetic sneak: " + config.getSneakTitle()));
+    }
+
     @CommandDefinition(route = "cosmetic|actioncosmetic sneak", permission = "actioncosmetic.command.sneak", runAsync = true)
     public void onSneakCommand(final @Source Player player) {
 
@@ -40,6 +49,6 @@ public class CosmeticCommands implements CommandContainer {
     public void onReloadCommand(final @Source CommandSender sender) {
 
         config.reload();
-        sender.sendMessage("Config reloaded");
+        sender.sendMessage(Component.text("Config reloaded"));
     }
 }
