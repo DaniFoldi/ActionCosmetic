@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.danifoldi'
-version '1.1.0'
+version '1.1.1'
 
 sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
@@ -23,7 +23,7 @@ dependencies {
     implementation 'com.github.stefvanschie.inventoryframework:IF:0.10.4'
 
     implementation 'com.danifoldi:DML:1.0.0'
-    compileOnly 'com.danifoldi:DataVerse:0.3.0'
+    compileOnly 'com.danifoldi:DataVerse:0.4.0'
     implementation 'com.danifoldi:messagelib:1.0.1'
     implementation 'grapefruit:grapefruit:1.4.0'
 

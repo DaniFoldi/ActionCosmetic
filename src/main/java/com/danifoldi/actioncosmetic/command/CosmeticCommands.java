@@ -1,6 +1,7 @@
 package com.danifoldi.actioncosmetic.command;
 
 import com.danifoldi.actioncosmetic.config.Config;
+import com.danifoldi.actioncosmetic.config.MessageUtil;
 import com.danifoldi.actioncosmetic.data.ActionGui;
 import grapefruit.command.CommandContainer;
 import grapefruit.command.CommandDefinition;
@@ -31,8 +32,8 @@ public class CosmeticCommands implements CommandContainer {
     @CommandDefinition(route = "cosmetic|actioncosmetic help", permission = "actioncosmetic.command.help", runAsync = true)
     public void onHelpCommand(final @Source CommandSender sender) {
 
-        sender.sendMessage(Component.text(ChatColor.translateAlternateColorCodes('&', "/cosmetic jump: " + config.getJumpTitle())));
-        sender.sendMessage(Component.text(ChatColor.translateAlternateColorCodes('&', "/cosmetic sneak: " + config.getSneakTitle())));
+        sender.sendMessage(Component.text(MessageUtil.colorCodes(config.getJumpCommand())));
+        sender.sendMessage(Component.text(MessageUtil.colorCodes(config.getSneakCommand())));
     }
 
     @CommandDefinition(route = "cosmetic|actioncosmetic sneak", permission = "actioncosmetic.command.sneak", runAsync = true)

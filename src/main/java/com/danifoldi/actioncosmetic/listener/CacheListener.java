@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class CacheListener implements Listener {
 
     private final @NotNull SettingCache cache;

@@ -29,6 +29,8 @@ public class Config {
 
     private String sneakTitle;
     private String jumpTitle;
+    private String sneakCommand;
+    private String jumpCommand;
     private List<Cosmetic> cosmetics;
 
     private Path configFile;
@@ -38,6 +40,8 @@ public class Config {
         DmlObject config = DmlParser.parse(file).asObject();
         sneakTitle = config.get("sneakTitle").asString().value();
         jumpTitle = config.get("jumpTitle").asString().value();
+        sneakCommand = config.get("sneakCommand").asString().value();
+        jumpCommand = config.get("jumpCommand").asString().value();
         DmlObject configuredCosmetics = config.get("cosmetics").asObject();
 
         cosmetics = Collections.synchronizedList(new ArrayList<>());
@@ -73,6 +77,14 @@ public class Config {
 
     public String getJumpTitle() {
         return jumpTitle;
+    }
+
+    public String getSneakCommand() {
+        return sneakCommand;
+    }
+
+    public String getJumpCommand() {
+        return jumpCommand;
     }
 
     public List<Cosmetic> getCosmetics() {
