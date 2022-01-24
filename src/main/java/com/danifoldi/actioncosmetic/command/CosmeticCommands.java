@@ -8,7 +8,6 @@ import grapefruit.command.CommandDefinition;
 import grapefruit.command.dispatcher.Redirect;
 import grapefruit.command.parameter.modifier.Source;
 import net.kyori.adventure.text.Component;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

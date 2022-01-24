@@ -22,7 +22,7 @@ dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT'
     implementation 'com.github.stefvanschie.inventoryframework:IF:0.10.4'
 
-    implementation 'com.danifoldi:DML:1.0.0'
+    implementation 'com.danifoldi:DML:1.0.1'
     compileOnly 'com.danifoldi:DataVerse:0.4.0'
     implementation 'com.danifoldi:messagelib:1.0.1'
     implementation 'grapefruit:grapefruit:1.4.0'

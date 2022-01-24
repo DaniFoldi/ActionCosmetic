@@ -2,7 +2,6 @@ package com.danifoldi.actioncosmetic.config;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;

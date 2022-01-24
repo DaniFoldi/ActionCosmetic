@@ -1,8 +1,8 @@
 package com.danifoldi.actioncosmetic.config;
 
 import com.danifoldi.actioncosmetic.data.Cosmetic;
-import com.danifoldi.dml.DmlParseException;
 import com.danifoldi.dml.DmlParser;
+import com.danifoldi.dml.exception.DmlParseException;
 import com.danifoldi.dml.type.DmlKey;
 import com.danifoldi.dml.type.DmlObject;
 import org.bukkit.Particle;
