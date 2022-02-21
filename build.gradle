@@ -23,7 +23,7 @@ dependencies {
     implementation 'com.github.stefvanschie.inventoryframework:IF:0.10.4'
 
     implementation 'com.danifoldi:DML:1.0.1'
-    compileOnly 'com.danifoldi:DataVerse:0.4.0'
+    compileOnly 'com.danifoldi:DataVerse:0.4.1'
     implementation 'com.danifoldi:messagelib:1.0.1'
     implementation 'grapefruit:grapefruit:1.4.0'
 
