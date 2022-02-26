@@ -1,7 +1,7 @@
 main: com.danifoldi.actioncosmetic.ActionCosmeticPlugin
 author: DaniFoldi
 name: ActionCosmetic
-description: Spawn particles on certain actions
+description: Set particle effects for sneaking and jumping
 api-version: 1.13
 version: ${version}
 depend:
