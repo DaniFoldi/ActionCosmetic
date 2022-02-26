@@ -1,13 +1,14 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'maven-publish'
 }
 
 group 'com.danifoldi'
 version '1.1.1'
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -19,18 +20,18 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
     implementation 'com.github.stefvanschie.inventoryframework:IF:0.10.4'
 
-    implementation 'com.danifoldi:DML:1.0.1'
-    compileOnly 'com.danifoldi:DataVerse:0.4.0'
+    implementation 'com.danifoldi:DML:1.0.2'
+    compileOnly 'com.danifoldi:DataVerse:0.4.1'
     implementation 'com.danifoldi:messagelib:1.0.1'
     implementation 'grapefruit:grapefruit:1.4.0'
 
     compileOnly 'org.jetbrains:annotations:23.0.0'
     implementation 'javax.inject:javax.inject:1'
-    implementation 'com.google.dagger:dagger:2.40.5'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.40.5'
+    implementation 'com.google.dagger:dagger:2.41'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.41'
 }
 
 compileJava {
@@ -58,4 +59,45 @@ shadowJar {
     relocate 'com.google.common', 'com.danifoldi.actioncosmetic.lib.google'
 
     archiveFileName.set("${project.name}-${project.version}.jar")
+}
+
+tasks.withType(PublishToMavenRepository) { task ->
+    dependsOn("shadowJar")
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = 'actioncosmetic'
+
+            artifact('build/libs/' + project.name + '-' + project.version + '.jar') {
+                extension 'jar'
+            }
+
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+
+            pom {
+                name = 'actioncosmetic'
+                description = 'Set particle effects for sneaking and jumping'
+                url = 'https://github.com/DaniFoldi/ActionCosmetic'
+            }
+        }
+    }
+    repositories {
+        maven {
+            name 'danifoldi'
+            url 'https://repo.danifoldi.com/repository/maven-releases/'
+            credentials {
+                username project.user
+                password project.password
+            }
+        }
+    }
 }

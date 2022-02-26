@@ -8,6 +8,7 @@ import com.danifoldi.actioncosmetic.data.SettingCache;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -65,6 +66,10 @@ public class ActionListener implements Listener {
 
             return;
         }
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) {
+
+            return;
+        }
         if (VANISHED.test(player)) {
 
             return;
@@ -108,6 +113,10 @@ public class ActionListener implements Listener {
         UUID uuid = player.getUniqueId();
 
         if (VANISHED.test(player)) {
+
+            return;
+        }
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) {
 
             return;
         }
